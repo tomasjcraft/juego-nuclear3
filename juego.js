@@ -119,7 +119,7 @@ function actualizarBalas() {
     for (let i = balas.length - 1; i >= 0; i--) {
         let bala = balas[i];
         
-        // Elimina la bala si sale de la pantalla
+        
         
     }
 }
