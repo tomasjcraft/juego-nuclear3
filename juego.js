@@ -35,6 +35,7 @@ function setup() {
     // Crea el sprite del jugador
     player = createSprite(width - 1100, height - 30, 20, 20);
     player.addImage("1", player1img);
+    player.addImage("2", player2img);
     player.scale = 0.2;
     player.visible = false;
     
@@ -67,7 +68,7 @@ function draw() {
             player.x += 10;
         }
         if (keyDown("space")) {
-            player.y -= 10;
+            player.y = player.y-=20;
         }
         if (keyDown("a")) {
             player.x -= 10;
@@ -76,11 +77,11 @@ function draw() {
 
         // Control de disparo y animación
         if (mouseIsPressed && mouseButton === LEFT) {
-            player.changeAnimation("2", player2img);
+            player.changeAnimation("2",player2img);
             dispararBala();
         } else {
             setTimeout(() => {
-                player.changeAnimation("1", player1img);
+                player.changeAnimation("1",player1img);
             }, 1500);
         }
 
@@ -88,7 +89,7 @@ function draw() {
     }
 
     // Actualiza la gravedad del jugador
-    player.velocityY += 0.4;
+    player.velocityY = player.velocityY + 0.4;
     player.collide(pisobunquer);
 
     // Actualiza las balas
@@ -101,7 +102,7 @@ function dispararBala() {
     // Verifica si han pasado al menos 2 segundos (2000 milisegundos) desde el último disparo
     if (tiempoActual - ultimoDisparo >= 1000) {
         // Crear un nuevo sprite para la bala
-        let nuevaBala = createSprite(player.x, player.y, 10, 10);
+        let nuevaBala = createSprite(player.x, player.y-20, 10, 10);
         nuevaBala.addImage(balasImg); // Asigna la imagen de bala cargada al sprite
         nuevaBala.scale = 0.01; // Cambia el tamaño de la bala a 0.1
         nuevaBala.velocityX = 20; // Aumenta la velocidad de la bala a 15
@@ -119,10 +120,7 @@ function actualizarBalas() {
         let bala = balas[i];
         
         // Elimina la bala si sale de la pantalla
-        if (bala.x > width) {
-            bala.remove();
-            balas.splice(i, 1);
-        }
+        
     }
 }
 
